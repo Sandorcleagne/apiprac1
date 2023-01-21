@@ -1,0 +1,13 @@
+const express = require("express");
+const app = express();
+const cors = require("cors");
+const router = require("./routes/product");
+const connectDb = require("./database/connection");
+const PORT = 5000;
+require("dotenv").config();
+app.use(express.json());
+app.use("/", router);
+app.use(cors());
+connectDb(process.env.DATABASEURI);
+app.get("/", (req, res) => res.send("hello"));
+app.listen(PORT, () => console.log(`${PORT} Server is Listening`));
